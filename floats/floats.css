@@ -1,0 +1,203 @@
+/*float is a layout technique*/
+
+
+:root {
+    box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
+
+body {
+    background-color: #eee;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+body * + * {
+    margin-top: 1.5em;
+}
+
+header {
+    padding: 1em 1.5em;
+    color: #fff;
+    background-color: #0072b0;
+    border-radius: .5em;
+    margin-bottom: 1.5em;
+}
+  
+.main {
+    /*font-size:10px;*/
+    /*only if we set font-size as 10, the em's will adjust to this value, otherwise whatever is mentioned in root, or if nothing is mentioned in root, then 16px*/
+    /*initially it was said that em is generally used for paddings and margins, but how does font-size actually relate to the left and right margin of current page, controverial*/
+    padding: 0 1.5em; /*this padding evaluates to 1.5*16=24px*/
+    background-color: #fff;
+    border-radius: .5em;
+}
+
+
+/*
+            *********double container pattern********  //area within dashed lines represent the margins
+            | |                                 | |
+            | |---------------------------------| |
+            | |---------------------------------| | 
+            | |                                 | |
+            | |                                 | |
+            | |                                 | |
+            | |---------------------------------| |
+            | |---------------------------------| |
+            | |                                 | |
+*/
+
+
+
+.media {
+    float: left;
+    width: 50%;
+    padding: 1.5em;
+    background-color: #eee;
+    border-radius: 0.5em;
+}
+
+
+/*difficuilt to understand the clearfix property*/
+.clearfix::after {
+    display: block;
+    content: " ";
+    clear: both;
+}
+
+.clearfix::before,
+.clearfix::after {
+  display: table;
+  content: " ";
+}
+.clearfix::after {
+  clear: both;
+}
+
+
+
+/*
+
+______________
+|            | |++++++++++++|
+|            | |            |
+|            | |            |
+|            | ++++++++++++++            
+++++++++++++++  |+++++++++++| //even a 1px difference causes this box to move to the right, despit setting float as left
+                |           | // even if some hacks are applied, the content may change and may cause complications in future 
+                |           |
+                +++++++++++++
+*/   
+.media {
+    float: left;
+    width: 50%;
+    padding: 1.5em;
+    background-color: #eee;
+    border-radius: 0.5em;
+  }
+
+/*there is a good trick for this - every odd block shoulf be cleared to the left*/
+/*what cleared left would do is, it would move all content below (wrap the content below)the floated object which is the one the left*/ /*it looks like the even boxes are considered as conent??????*/
+.media:nth-child(odd) {
+    clear: left;
+}
+
+
+/*A picture on the left anf description on the right is called a media object (pattern)*/
+
+.media-image {
+    float: left;
+}
+.media-body {
+    margin-top: 0;
+}
+.media-body h4 {
+    margin-top: 0;
+}
+
+/*
+To fix the behavior of the text, you’ll need to understand a little more about how floats work.
+*/
+
+/*
+block formatting context
+*/
+
+
+
+.media {
+    float: left;
+    margin: 0 1.5em 1.5em 0;
+    width: calc(50% - 1.5em);
+    padding: 1.5em;
+    background-color: #eee;
+    border-radius: 0.5em;
+}
+.media:nth-child(odd) {
+    clear: left;
+}
+.media-image {
+    float: left;
+    margin-right: 1.5em; /*adds a margin to the image to create a space between img and txt*/
+}
+.media-body {
+    overflow: auto; /*Establishes a new block formatting context so the body doesn’t overlap the floated image*/
+
+                    /*overflow acts a bit differently here,
+                        when overflow is auto in a container having some content, then scrollbar is set and the content can  be read by scrolling action
+                        when overflow is auto and the parent container is a float object, then overflow will, I think, increase the height of the float
+                    */
+
+                    /*
+                    >>>>>>>CSS TRICKS site<<<<<<<
+                    The Overflow Method relies on setting the overflow CSS property on a parent element. If this property is set to auto or hidden on the parent element, the parent will expand to contain the floats, effectively clearing it for succeeding elements. This method can be beautifully semantic as it may not require additional elements. However if you find yourself adding a new div just to apply this, it is equally as non-semantic as the empty div method and less adaptable. Also bear in mind that the overflow property isn’t specifically for clearing floats. Be careful not to hide content or trigger unwanted scrollbars.
+                    */
+    margin-top: 0; 
+}
+.media-body h4 {
+    margin-top: 0;
+}
+
+
+/* http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code */
+
+
+/*Certain styles apply to media-body*/
+
+
+
+/*what is BFC?*/
+/*A block formatting context is just a region of the page in which elements are laid out*/
+/*it is a part of surrounding document flow, but it isolates its contents from its surrounding elements*/
+/*we say that the element established a BFC*/
+/*and if it does, the folling things happen*/
+/*
+1.It contains the top and bottom margins of all elements within it. 
+    imp: The margins won’t col- lapse with margins of elements outside of the block formatting context.
+2.It contains all floated elements within it.
+3.It doesn’t overlap with floated elements outside the BFC.
+*/
+/*Put simply, the contents inside a block formatting context will not overlap or interact with elements on the outside as you would normally expect*/
+
+
+
+/*how to establish a BFC*/
+/*
+Applying any of the following property values to an element triggers one: (in our case media-body is establishing a Block Formatting context)
+1. float: left or float: right—anything but none
+2. overflow: hidden, auto, or scroll—anything but visible (not sure how this achieves BFC)
+3. display: inline-block, table-cell, table-caption, flex, inline-flex,
+    grid, or inline-grid—these are called block containers.
+4.position: absolute or position: fixed
+*/
+
+
+/*
+NOTE:
+ The page’s root element also creates a top-level block formatting con-text for the page.
+ In React, the BFC should be considered as one component(good pattern)
+*/

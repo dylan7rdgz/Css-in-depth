@@ -1,0 +1,78 @@
+body {
+    background-color: #eee;
+    font-family: Helvetica, Arial, sans-serif;
+}
+header {
+    color: #fff;
+    background-color: #0072b0;
+    border-radius: .5em;
+}
+main {
+    display: block; /*fixes IE bug, but how?*/ /*This is a element selector, IE has a deafult of inline for main elements, so we are changing this to block*/
+}
+.main {
+    background-color: #fff;
+    border-radius: .5em;
+}
+.sidebar {
+    padding: 1.5em;
+    background-color: #fff;
+}
+
+main {
+    box-sizing: border-box;
+    float: left;
+    width: 70%;
+    background-color: #fff;
+    border-radius: .5em;
+  }
+
+.sidebar {
+    box-sizing: border-box;
+    float: left;
+    width: 30%;
+    padding: 1.5em;
+    background-color: #fff;
+    border-radius: .5em;
+}
+  /*when we see this in browser these elements i.e main and sidebar wrap, this is because of the additional padding, etc that gets added*/
+  /*this issue was present when the deafault box-sizing was content-box, with box-sizing: border-box, things*/
+
+  /*what is confusing me is that main and sidebar are block elements, so they should go onto the next line anyways*/
+
+
+
+
+  :root {
+    box-sizing: border-box;
+  }
+
+  *,
+  ::before,
+  ::after {
+    box-sizing: inherit;
+  }
+
+  .third-party-component {
+    box-sizing: content-box;
+  }
+  
+
+
+  .main {
+    float: left;
+    width: 70%;
+    background-color: #fff;
+    border-radius: .5em;
+  }
+  .sidebar {
+    float: left;
+    width: calc(30% - 1.5em);
+    margin-left: 1.5em;
+    padding: 1.5em;
+    background-color: #fff;
+    border-radius: .5em;
+}  
+
+
+/*HTML should only be responsible for content, not layout*/

@@ -1,0 +1,9 @@
+My default is to use 
+    1.rems for font sizes,
+    2.pixels for borders,(to get a nice thin line)
+    3.ems for most other measures, especially paddings, margins, and border radius (think of adjusting margins,paddings,border-radius,etc relative to the font size)
+    4.percentages for container widths when necessary.
+
+
+
+                    

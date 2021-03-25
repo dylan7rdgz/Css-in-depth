@@ -1,0 +1,116 @@
+
+
+
+
+
+/* $Tag selector$ applies to all h1 tags in html document*/
+
+    /* h1 {
+    font-family: serif;
+   } */
+/*$Id selector$*/
+
+   /* #page-title {
+    font-family: sans-serif;
+   } */
+/*$Class selector*/
+
+   /* .title {
+    font-family: monospace;
+   }  */
+
+/*Priority of Id selector > class selector > tag selector*/ /*this is the cascading property*/
+
+
+
+/*
+Types of styles priority wise
+Author important
+author styles
+user style sheet
+user-agent styles[Browser's Default styles]
+*/
+
+h1{/*x*/
+    color: black;
+}
+
+h1 {/*y*/
+    color: blue;
+    margin-bottom: 10px; /*This declaration block has higher 
+    priority than previous h1 block
+     because it is higher source code wise*/
+   }
+   h1 {/*z*/
+    font-family: monospace;
+   }
+   /*One would think that this block gets applied because the block is higher source code wise
+   Here we did not override the previous h1 declarations but instead added a new rule 
+   which gets added to the previous h1 rule set*/
+
+   /*also in the browser we will see that there are 2 h1 rules that are applied*/
+   /*first we will see h1 font-family and then we will see h1 color blue, margin bottom*/
+
+   /*the style rules in the browser is declared in opposite order of source code*/
+   /*this means that z will appear first, then y and then x*/
+
+   /*the specificity is displayed in the same order*/
+
+
+   /*note that only styles of the selected element appears on the styles scetion of browser*/
+
+
+   /*it clearly makes sense that the overriden value is cancelled below and displayed onthe top, this is indicating that the topmost styles has highest priority specificity wise and src wise*/
+
+
+#jadyn {
+   font-family: 'Courier New', Courier, monospace;
+}
+
+#jadyn{
+   color: pink;
+}
+
+
+/*so to sum up, jadyn has an id applied to h1 element,
+so jadyn pink appears before jadyn font-family in the browser*/
+
+   #main-nav {
+    margin-top: 10px;
+    list-style: none;
+    padding-left: 0;
+   }
+   #main-nav li {
+    display: inline-block;
+   }
+   #main-nav a {
+    color: white;
+    background-color: #13a4a4;
+    padding: 5px;
+    border-radius: 2px;
+    text-decoration: none;
+   }
+
+
+header {
+   display: inline;
+}
+/*wow, generally block and inline are values for display, even grid and flex are value for display declaration */
+
+
+a:link {
+   color: blue;
+ }
+
+
+ .footer {
+     color: #666;
+     background-color: #ccc;
+     padding: 15px 0;
+     text-align: center;
+     font-size: 14px;
+   }
+   .footer a {
+     color: inherit;
+     text-decoration: underline;
+   }

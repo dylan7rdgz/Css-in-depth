@@ -1,0 +1,49 @@
+:root {
+    font-size: 0.875em;/*14px*/
+}
+
+.panel {
+    padding: 1em;/*when not font-size property we specify this as em*/
+    border-radius: 0.5em;
+    border: 1px solid #999;
+}
+
+
+.panel > h2 {
+    margin-top: 0;
+    font-size: 0.8rem; /*when font-size property we specify this as rem*/
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+
+
+:root {
+    font-size: 0.75em;
+}
+
+/*Responsive-ness technique - when the width of the viewport is greater than 800px the root font-size takes a value of 0.875em, so all over the size of the font will increase for a larger screen*/
+/*so when the size of viewport changes all the button paddings and button-radii adapt accordingly*/
+/*if our client says that the size of the font is too so small for a specific screen, we just have to chnage the root value within the media query, and with ripple-effect the whole screen will change and adapt correctly*/
+/*this technique is impossible with pixels*/
+@media (min-width: 800px) {
+    :root {
+        font-size: 0.875em;
+    }
+}
+@media (min-width: 1200px) {
+    :root {
+        font-size: 1em
+    }
+}
+
+
+/*How about avoiding media queries?*/
+/*
+we can make use of vw i.e view width
+based on the width the font size will render correctly
+this may work fine by adjusting the view-width of browser
+but on an  iphone 6 which has a very small screen, the font may scale down rapidly to an extream small value
+to counter this issue we can use a calc(0.5em + 1vw) function, this function will set a base size of 8px which will help us to have a slightly more larger font size on x-small screens
+*/

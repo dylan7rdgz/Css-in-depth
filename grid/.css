@@ -1,0 +1,54 @@
+.grid {
+    display: grid;
+    /*
+    The display property specifies if/how an element is displayed.
+    A block-level element always starts on a new line and takes up the full width available 
+    (stretches out to the left and right as far as it can).
+    The, i think, grid container acts as a block-level element
+
+    v/s
+
+     Although not shown in this listing, you could also use the value inline-grid; 
+     in which case, the ele- ment will flow inline and will only be as wide as is
+      necessary to contain its children.
+
+
+      You’ll most likely not use inline-grid as often.
+      WHY???
+    */
+
+    grid-template-columns: 1fr 1fr 1fr;   /*Not necessary to use fractional units; we can use px and, i think, percentages*/
+    /*Three columns with an EQUAL size*/
+    /*Like Flex grow*/
+    /*Recall Flex growth*/
+    /*Flex growth fills up a specified fraction of the remainder*/
+    /*This unit behaves essentially the same as the flex-grow factor in flexbox.*/
+    grid-template-rows: 1fr 1fr;
+    /*Two rows with an EQUAL size*/
+
+    grid-gap: 0.5em;
+  }
+
+  /*All children of grid container*/
+  .grid > * {
+    background-color: darkgray;
+    color: white;
+    padding: 2em;
+    border-radius: 0.5em;
+  }
+
+
+
+/*Anatomy of grid*/
+
+
+/*
+BasicGRID = gird container and gird items
+
+ Grid line—These make up the structure of the grid. A grid line can be vertical or horizontal and lie on either side of a row or column. The grid-gap, if defined, lies atop the grid lines.
+ Grid track—A grid track is the space between two adjacent grid lines. A grid has horizontal tracks (rows) and vertical tracks (columns).
+ Grid cell—A single space on the grid, where a horizontal grid track and a vertical grid track overlap.
+ Grid area—A rectangular area on the grid made up by one or more grid cells. The area is between two vertical grid lines and two horizontal grid lines.
+
+*/
+

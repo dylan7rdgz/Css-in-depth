@@ -1,0 +1,20 @@
+1)Difference between <display: inline-flex> and <display: flex>
+display: inline-flex does not occupy the entire widht of the screen this is more like an inline block element it flows inline with other inline elements
+#Read about inline elements
+display: flex occupys all 100% of the widht; which indicates that althought the element does not occupy the entire width, the rest would be spaced with white
+
+
+
+types of display values
+
+display: inline
+display: inline-block
+display:
+display:
+
+These only effect the <elements> they are applied to
+Instead, a flex container asserts control over the layout of the elements within
+
+
+*** Vendor Prefixes ***
+In Some vendors like safari 8 and IE, it is necessary to have prefixes to flexbox declarations

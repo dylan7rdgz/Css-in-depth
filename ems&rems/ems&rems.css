@@ -1,0 +1,132 @@
+/*
+Power of Relative units
+we can think of css as contents and styles
+the content and styles are not pulled together until the authoring of both are complete, this is called as the problem of late binding
+but the value of this is that 
+    1.one style sheet can be applied to hundreds or thousands of pages
+    2.Furthermore, the final rendering of the page can be altered directly by the user(developer??), who, for example, can change the default font size or resize the browser window.
+*/
+
+
+
+/*Concept*/
+/*The ruleset specifies a font size of 16 px, which becomes the element’s local definition for 1 em. */
+
+
+.padded {
+    font-size: 16px;
+    padding: 1em; /*This padding has a specified value of 1em. */ /*This is multiplied by the font size, producing a rendered padding of 16 px.*/
+    /*This is important: Values declared using relative units are evaluated by the browser to an absolute value, called the computed value.*/
+}
+
+.padded {
+    font-size: 32px;
+}
+/*another css selector targeting the same element is added as above, then the local meaning of 1em will change despite it being declared in above css*/
+
+
+
+/*Technique 1*/
+.box {
+    padding: 1em;
+    border-radius: 1em;
+    background-color: lightgray;
+  }
+.box-small {
+    font-size: 12px;
+}
+.box-large {
+    font-size: 18px;
+}
+
+/*the above is a very fundamental example*/
+/*
+box is central
+box-small explicitly specifies the font-size as 12px and box scales accordingly
+box-large explicitly specifies the font-size as 18px and box scales accordingly
+*/
+
+
+
+
+
+/*some font-size concepts*/
+
+
+/*
+<body>
+  We love coffee
+  <p class="slogan">We love coffee</p>
+</body>
+*/
+
+
+/*
+1.the browser has a font size of 16px
+2.16px is same as the "medium property"
+*/
+
+
+/*Technique 2-using ems to define font size*/
+/*
+1. when it comes to font-size ems behave a bit differently
+2. 
+
+
+*/
+
+.body {
+    font-size: 16px;
+}
+
+.slogan {
+    font-size: 1.2em; /*19.2px*/ /*inherited font size*/
+}
+/*font-size of slogan inherits the body's font size*/
+
+
+
+
+
+/*Pitfalls of ems*/
+/*
+ems can be tricky if we try to use them for both; font-size and any other properties on the same element
+when we do this, the browser will calculate
+    1.the font size first 
+    2.then it uses this font-size value to calculate other values
+Both properties can have the same declared value, but they’ll have different com-puted values. ????
+*/
+
+
+
+
+/*the shrinking font problem*/
+/*
+Ems can produce unexpected results when you use them to specify the font sizes of multiple nested elements. 
+
+.body {
+    font-size: 16px
+}
+.title {
+    font-size: 2em //2*16px=32px
+}
+.sub-title {
+    font-size: 4em //not its not 4em of 16px, its 4em of 32px(inherits the parents total font-size, i.e. 4*32px=128)
+}
+.sub-sub-title {
+    font-size: 8em // 8*128px=1024px
+}
+
+suppose i wanted to know what would be a good value for sub-sub-title font size?
+I would need to know what is the font-size of sub-title
+but this value is specified in em, which compells me to find the px value of sub-title, and then font size of title and so on and so forth upto body
+
+This becomes quickly apparent when you use ems for the font size of <li> or <ul> and then nest <li> or <ul> several levels deep.
+*/
+
+
+
+/*Stop Thinking in Pixels*/
+
+
+/*Setting a sane default font size*/

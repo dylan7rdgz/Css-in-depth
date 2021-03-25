@@ -1,0 +1,304 @@
+                                         /*Introduction*/
+
+/*
+poition is a css property
+*/
+
+/*
+Applications:
+Drop down menu
+Modal dialogs
+Other essential effects
+*/
+
+/*
+Problems:
+wrong elements in front of others; difficuilt to correct the problem
+*/
+
+/*
+types of positioning (various types)
+stacking context (hidden side effect of positioning); whenever I find my self "out in the weeds" with page layout, this understanding will give me the tools to get back on track
+*/
+
+/*
+Initial value of positioning is static
+*/
+
+/*
+We generally apply a style to an element
+1.Initial value of positioning is static (meaning all elements have a value of static by default) non-positioned
+2.When an element has a style of positioning that is other than static, the element is called positioned
+*/
+
+/*
+Layout methods do various things to manipulate behaviour of document flow
+Positioning    removes elements from the document flow entirely; allows us to place the element somewhere else on screen
+               it can place elements in front of or behind one another; thus allowing overlapping
+*/
+
+
+
+/*
+Fixed positioning:
+position: fixed [lets us position an element arbitrarily within the viewport]
+
+companion properties:
+top, bottom, left, right
+implicitly defines the width and height of the element by specifying these companion property
+For example, specifying left: 2em; right: 2em 
+means the left edge of the ele- ment will be 2 em from the left side of the viewport,
+and the right edge will be 2 em from the right side; 
+thus, the element will be 4 em less than the total viewport width. L
+Likewise with top, bottom, and the viewport height.
+*/
+
+
+                            /*building a modal box*/
+
+                            /*Fixed Positioning*/
+
+/*Consider a form where a user can signup for a news letter*/
+/*the dialog will initially be hidden [display: none]*/
+/*use js to change to display: block*/
+
+/*styles for corresponding html*/
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    min-height: 200vh;                         /*we have set the view height to demonstrate that despite scrolling down the page, the modal remains fixed and doesn't move along the scroll; this is because we fixed positioning*/
+    margin: 0;
+}
+
+
+button {
+    padding: 0.5em 0.7em;
+    border: 1px solid #8d8d8d;
+    background-color: white;
+    font-size: 1em;
+}
+
+
+.top-banner {
+    padding: 1em 0;
+    background-color: #ffd698;
+}
+
+
+.top-banner-inner {
+    width: 80%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.modal {
+    display: none;
+}
+
+
+
+.modal-backdrop {
+    position: fixed;     /*positioning as fixed used here*/
+
+    top: 0;             /*companion properties*/ /*all set to 0 implicitly sets the backdrop to fill the entire viewport size*/
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-color: rgba(0, 0, 0, 0.5);   /*rgba property 0,0,0 evaluates to black and 0.5 is an alpha value which measures transparency*/
+}
+
+.modal-body {
+    position: fixed;    /*positioning as fixed used here*/
+
+    top: 3em;           /*companion properties*/ /*these properties allows us to create a small modal w.r.t viewport*/
+    bottom: 3em;    
+    right: 20%;
+    left: 20%;
+
+    padding: 2em 3em;
+    background-color: white;
+    overflow: auto;
+}
+
+
+.modal-close {
+    cursor: pointer;
+}
+
+
+
+
+
+/*
+    we dont only have to specify top, bottom, roght, left
+    we could also specify the height and width
+    sometimes is the height is not mentioned then it would automatically (naturally) be determined by is contents
+    suppose we have a navigation menu, if we explicitly set the height, the contents will shrink, i think
+    but if we dont set it, there may exist a scroll bar
+
+
+    when we have a postion attribute, the fixed element is removed from the document flow
+    the contents behind the fixed element will follow the document flow
+    in case of a dialog we want the other contents to be hidden
+    but in case of a navigational menu we want the behind elements to be seen, we dont want other contents to flow behind it
+    This is usually easiest to do by adding a margin to the content. 
+
+    For instance, place all your content in a container with a right-margin:20%. 
+    This margin will flow behind your fixed element, and the content won’t overlap.
+
+*/
+
+                               /*Absolute Positioning*/
+/*Fixed positioning is always relative to the vieport;
+ in this case the viewport is the container
+ In some cases we may want to use another element/block as a container
+ 
+ The declaration left: 2em,
+  for example, places the left edge of a positioned element 2 em from the left edge of the containing block.*/
+
+
+
+
+/*previously modal-close is at the center*/
+
+
+/*but now we want it to be relative to the modal*/
+/*hence it will be placed at 0.3em from top of modal and 0.3em from right of the modal*/
+  .modal-close {
+    position: absolute;
+    top: 0.3em;
+    right: 0.3em;
+    padding: 0.3em;
+    cursor: pointer;
+}
+  
+/*since modal-close had a parent "element" which encorporates the use of positioning, modal-close's positioning will be relative to the parent (i.e. modal)*/
+/*but there are cases where there could be a parent element which does not have a positioning property but does have a gradparent that has a positioning property*/
+/*hence the dom is serached until a grandparent is found having positioning property*/
+
+/*
+NOTE If none of the element’s ancestors are positioned, then the absolutely positioned element will be positioned based on something called the initial containing block. This is an area with dimensions equal to the viewport size, anchored at the top of the page.
+*/
+
+
+
+
+ .modal-close {
+    position: absolute;/*the position is absolute*/
+
+    top: 0.3em; /*foll: are the companion elements of the position property*/
+    right: 0.3em;
+    padding: 0.3em;
+    cursor: pointer;
+    font-size: 2em;
+
+    height: 1em; /*sets the button size to a 1em*1em square*/
+    width: 1em;
+
+
+    text-indent: 10em;/*push the text to the right; the value doesn't matter; just add a value so that the text moves completely outside the button*/   /*push the text outside the button*/
+
+
+    overflow: hidden;/*hide the overflow*/
+    border: 0;
+  } 
+
+
+
+
+  .modal-close::after {
+
+
+    /*this style is applied after .modal-close style is applied which helps the modal-close to become the position container for this model-close::after style*/
+    position: absolute;
+    line-height: 0.5;
+
+    top: 0.2em; /*foll: are the companion elements of the position property*/ /*positioning the X to the center*/
+    left: 0.1em;
+
+    text-indent: 0; /*the modal-close is a style for an element; once the modal-close is all set up, these css props would then apply, un-intend the text, which we have intended before by setting text-intend: 0*/
+    content: "\00D7"; /*unicode for multiplication sign*/ /*The HTML character &times; will render as this character, but in the CSS content property, you must use the escaped unicode number: \00D7.*/
+  }
+  
+
+
+
+
+
+                                        /*Relative positioning*/
+
+/*wont see visible change on the page when we apply position: relative to an element*/
+
+/*1)relatively positioned element and 2)all other elements appear whereever they are*/
+
+/*However we will know which element is in front of which*/
+
+/*imagine if we align four boxes on one line, and the second box has the foll props top: 1em, left 2em, then 1)only the second element is shifted,  2)the rest of the elements follow normal document flow*/
+
+
+  /*creating a drop down menu*/
+
+  .container {
+    width: 80%;
+    max-width: 1000px;
+    margin: 1em auto
+  }
+  
+  .dropdown {
+    display: inline-block;
+    position: relative;
+  }
+
+
+  .dropdown-label {
+    padding: .5em 1.5em;
+    border: 1px solid #ccc;
+    background-color: #eee;
+  }
+
+
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 2.1em;
+  min-width: 100%;
+  background-color: #eee;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+
+  .submenu {
+    padding-left: 0;
+    margin: 0;
+    list-style-type: none;
+    border: 1px solid #999;
+  }
+
+
+
+  .submenu > li + li {
+    border-top: 1px solid #999;
+  }
+
+
+
+.submenu > li > a {
+    display: block;
+    padding: .5em 1.5em;
+    background-color: #eee;
+    color: #369;
+    text-decoration: none;
+  }
+
+
+
+.submenu > li > a:hover {
+    background-color: #fff;
+  }
+

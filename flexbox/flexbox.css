@@ -1,0 +1,150 @@
+:root {
+    box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: #709b90;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+body * + * {
+    margin-top: 1.5em;
+}
+
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.site-nav {
+    display: flex;
+    padding-left: 0;
+    list-style-type: none;
+    background-color: #5f4b44;
+ }
+
+.site-nav > li {
+    margin-top: 0;
+}
+
+/* '>' is a selector; meaning: for all li and a that are children of site-nav apply the css declarations*/
+.site-nav > li > a {
+    background-color: #cc6b5a;
+    color: white;
+    text-decoration: none;
+  }
+
+
+/*I have delibretely added the following rules to show that the next 3 site-nav rules will override the previous 3 site-nav rules*/
+
+  .site-nav {
+    display: flex;
+    padding: .5em;
+    background-color: #5f4b44;
+    list-style-type: none;
+    border-radius: .2em;
+  }
+  .site-nav > li {
+    margin-top: 0;
+  }
+  .site-nav > li > a {
+    display: block;
+    padding: .5em 1em;
+    background-color: #cc6b5a;
+    color: white;
+    text-decoration: none;
+  }
+
+
+  .tile {
+    padding: 1.5em;
+    background-color: #fff;
+  }
+  .flex {
+    display: flex;
+  }
+  .flex > * + * {
+    margin-top: 0;
+    margin-left: 1.5em;
+  }  
+
+
+
+
+  
+  .site-nav > li + li {
+    margin-left: 1.5em;
+  }
+
+  
+
+
+
+
+
+  /*just a basic understanding of auto:
+  consider that we have a block level element
+   with height: auto will grow taller as it contains more text.
+
+  For another example, a block element with margin: 0 auto will have the left and right margins
+
+  so it looks like auto property has a special meaning when it is tied up with the key
+
+  */
+  .site-nav > .nav-right {
+    margin-left: auto;
+  }/*why does the margin ledt move the rightmost button to the right*/
+
+  .column-main {
+    flex: 2;
+  }
+  .column-sidebar {
+    flex: 1;
+  }
+
+  .column-main {
+    flex: 66.67%;
+  }
+  .column-sidebar {
+    flex: 33.33%;
+  }
+
+  .column-sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .column-sidebar > .tile {
+    flex: 1;
+  }
+  
+  .login-form h3 {
+    margin: 0;
+    font-size: .9em;
+    font-weight: bold;
+    text-align: right;
+    text-transform: uppercase;
+  }
+
+  .login-form input:not([type=checkbox]):not([type=radio]) {
+    display: block;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .login-form button {
+    margin-top: 1em;
+    border: 1px solid #cc6b5a;
+    background-color: white;
+    padding: .5em 1em;
+    cursor: pointer;
+  }
+   
+
+
